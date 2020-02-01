@@ -37,7 +37,7 @@ if (changeI >= 5)
     changeI = changeI - (nickels * 5);
     //printf ("%i %i \n",nickels,changeI);
 }
-else
+if (changeI < 5)
 {
     pennies = changeI;
     //printf ("%i %i \n",pennies,changeI);
