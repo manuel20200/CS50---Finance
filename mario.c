@@ -27,7 +27,7 @@ int main(void)
           printf ("#"); 
          } 
          
-          printf (" ");  ////// central space
+          printf ("  ");  ////// central spaces
          
            for (int l = 0; l <= i; l++)   ///// loop for right side of the pyramid (blocks)
          {
