@@ -3,12 +3,7 @@
 #include <math.h>
 
 float change = 0;
-int changeI = 0;
-int quarters = 0;
-int dimes = 0;
-int nickels = 0;
-int pennies = 0;
-int coins;
+int changeI, quarters, dimes, nickels, pennies = 0;
 
 int main (void)
 {
