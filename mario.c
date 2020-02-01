@@ -17,7 +17,7 @@ int main(void)
         
      for (int i = 0; i < Height; i++)  ///// loop for the levels of pyramid
      {
-         for (int j = 0; j <= (Height-i); j++)   //// loop for spaces of the left side
+         for (int j = 0; j < (Height-i-1); j++)   //// loop for spaces of the left side
          {
           printf (" "); 
          } 
