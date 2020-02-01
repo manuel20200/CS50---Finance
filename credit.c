@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<cs50.h>
 
-int main (void)
+int main(void)
 {
     long cardnumber = get_long("Number: ");
    
@@ -9,7 +9,7 @@ int main (void)
     int i = 0;
     int checksum = 0;   
     int size = 0;   //number of digits in the card number
-    int c1,c2 = 0;  //c1 first digit   c2 second digit   from left to right
+    int c1, c2 = 0; //c1 first digit   c2 second digit   from left to right
     
     while (number > 0)  //from number we'll get every digit, retiring every digit from number until we get only one digit
     {
@@ -23,10 +23,10 @@ int main (void)
         }
         if (number == 0)    //get the first digit  left to right
         {
-             c1 = digit;
+            c1 = digit;
         }
     
-        if ( i == 0 ) //add digit that musnt be multiply by 2
+        if (i == 0) //add digit that musnt be multiply by 2
         {
             i = 1;
             checksum = checksum + digit;
@@ -34,7 +34,7 @@ int main (void)
         else    //add digit that must be multiply by 2
         {
             i = 0;
-            if (2*digit >= 10)  //if result of multiplication by 2 is two digits, add the two digits to checksum
+            if (2 * digit >= 10) //if result of multiplication by 2 is two digits, add the two digits to checksum
             {
                 int digit1 = (2 * digit) % 10;
                 checksum = checksum + digit1 + 1;
