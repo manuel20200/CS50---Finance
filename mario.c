@@ -7,21 +7,21 @@ int main(void)
     
     do  //loop do-while for require valid height
     {
-      Height = get_int("Height: ");    
+        Height = get_int("Height: ");    
     } 
     while (Height <= 0 || Height > 8);
     
     for (int i = 0; i < Height; i++)    //loop for levels of pyramid
     {
-    for (int k = 0; (k < (Height - i - 1)); k++) 
-    {
-      printf(" ");
-    }   
-    for (int j = 0; j <= i; j++)    //loop for quantity of blocks in each level
-    {
-      printf("#");    
+        for (int k = 0; (k < (Height - i - 1)); k++)    //loop for spaces before blocks (if apply)
+        {
+            printf(" ");
+        }   
+        for (int j = 0; j <= i; j++)    //loop for quantity of blocks in each level
+        {
+            printf("#");    
+        }
+        printf("\n");     
     }
-      printf("\n");     
- }
     
 }
