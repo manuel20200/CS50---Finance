@@ -101,8 +101,8 @@ int main(void)
 
     }
 
-    printf("Letter (s): %i \n", letters);
-    printf("Word (s): %i \n", words);
-    printf("Sentence (s): %i \n", sentences);
-    printf("AVG= %0.1f %0.1f %0.1f %i \n", avgletters, avgwords, index, indexINT);
+    //printf("Letter (s): %i \n", letters);
+    //printf("Word (s): %i \n", words);
+    //printf("Sentence (s): %i \n", sentences);
+    //printf("AVG= %0.1f %0.1f %0.1f %i \n", avgletters, avgwords, index, indexINT);
 }
