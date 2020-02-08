@@ -96,13 +96,13 @@ int main(void)
         break;
         case 16: printf("Grade 16+\n");
         break;
-        default: printf("Grade before 1\n");
+        default: printf("Before Grade 1\n");
         break;
 
     }
 
-    //printf("Letter (s): %i \n", letters);
-    //printf("Word (s): %i \n", words);
-    //printf("Sentence (s): %i \n", sentences);
-    //printf("AVG= %0.1f %0.1f %0.1f %i \n", avgletters, avgwords, index, indexINT);
+    printf("Letter (s): %i \n", letters);
+    printf("Word (s): %i \n", words);
+    printf("Sentence (s): %i \n", sentences);
+    printf("AVG= %0.1f %0.1f %0.1f %i \n", avgletters, avgwords, index, indexINT);
 }
