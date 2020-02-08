@@ -16,12 +16,12 @@ int main(void)
         if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z')) //check if the value is a valid letter for getting number of letters
         {
             letters++;
-            if (text[i - 1] == ' ') //check number of words by cheking the spaces.
+            if (text[i - 1] == ' ') //check number of words by cheking the spaces before letters.
             {
                words++;
             }
         }
-        if (text[i] == ' ' && (text[i+1] == '"')) //check number of words by cheking the spaces.
+        if (text[i] == ' ' && (text[i+1] == '"')) //check number of words by cheking the spaces before ".
         {
             words++;
         }
@@ -30,43 +30,40 @@ int main(void)
             sentences++;
         }
     }
-    if (strlen(text) > 0)
+    if (strlen(text) > 0)   //if string has at mininum one letter increase counting of words
     {
-        words = words + 1;
+        words++;
     }
-    float avgletters = (float)letters / (float)words * 100;
-    float avgwords = (float)sentences / (float)words * 100;
+    float avgletters = (float)letters / (float)words * 100; //average of letters per 100 words L
+    float avgwords = (float)sentences / (float)words * 100; //average of sentences per 100 words S
 
-    //index = 0.0588 * L - 0.296 * S - 15.8
-    float index = (0.0588 * avgletters) - (0.296 * avgwords) - 15.8;
+    float index = (0.0588 * avgletters) - (0.296 * avgwords) - 15.8;    //calcule of index index = 0.0588 * L - 0.296 * S - 15.8
 
-    if (index < 0)
+    if (index < 0)  //index less than 0, set value 0
     {
         indexINT = 0;
     }
-    if (index >= 16)
+    if (index >= 16)    //index greater than 16, set value 16
     {
         indexINT = 16;
     }
-    else
+    else    //index between 1 and 16, round to the nearest integer
     {
-        int Aux0 = index * 10;
+        int Aux0 = index * 10;  //get decimal part
         int Aux1 = Aux0 % 10;
-        if (Aux1 >= 5)
+        if (Aux1 >= 5)  //if decimal is greater than 0.5 round to the next integer
         {
             indexINT = index;
             indexINT++;
         }
-        else
+        else    //if decimal is lower than 0.5 round to the last integer
         {
             indexINT = index;
         }
 
-
     }
 
-
-    switch (indexINT)
+    switch (indexINT)   //print index result
     {
         case 1: printf("Grade 1\n");
         break;
