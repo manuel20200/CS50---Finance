@@ -18,8 +18,12 @@ int main(void)
             letters++;
             if (text[i - 1] == ' ') //check number of words by cheking the spaces.
             {
-               words = words + 1;
+               words++;
             }
+        }
+        if (text[i] == ' ' && (text[i+1] == '"')) //check number of words by cheking the spaces.
+        {
+            words++;
         }
         if (text[i] == '.' || text[i] == '!' || text[i] == '?' )    //check number of sentences by checking points...
         {
