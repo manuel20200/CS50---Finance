@@ -13,19 +13,19 @@ int main(void)
 
     for (int i = 0; i < strlen(text); i++)
     {
-        if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z')) //check if the value is a valid letter for getting number of letters
+        if ((text[i] >= 'a' && text[i] <= 'z') || (text[i] >= 'A' && text[i] <= 'Z'))
         {
-            letters++;
+            letters++;  //check if the value is a valid letter for getting number of letters
             if (text[i - 1] == ' ') //check number of words by cheking the spaces before letters.
             {
-               words++;
+                words++;
             }
         }
-        if (text[i] == ' ' && (text[i+1] == '"')) //check number of words by cheking the spaces before ".
+        if (text[i] == ' ' && (text[i + 1] == '"')) //check number of words by cheking the spaces before ".
         {
             words++;
         }
-        if (text[i] == '.' || text[i] == '!' || text[i] == '?' )    //check number of sentences by checking points...
+        if (text[i] == '.' || text[i] == '!' || text[i] == '?')    //check number of sentences by checking points...
         {
             sentences++;
         }
@@ -65,40 +65,57 @@ int main(void)
 
     switch (indexINT)   //print index result
     {
-        case 1: printf("Grade 1\n");
-        break;
-        case 2: printf("Grade 2\n");
-        break;
-        case 3: printf("Grade 3\n");
-        break;
-        case 4: printf("Grade 4\n");
-        break;
-        case 5: printf("Grade 5\n");
-        break;
-        case 6: printf("Grade 6\n");
-        break;
-        case 7: printf("Grade 7\n");
-        break;
-        case 8: printf("Grade 8\n");
-        break;
-        case 9: printf("Grade 9\n");
-        break;
-        case 10: printf("Grade 10\n");
-        break;
-        case 11: printf("Grade 11\n");
-        break;
-        case 12: printf("Grade 12\n");
-        break;
-        case 13: printf("Grade 13\n");
-        break;
-        case 14: printf("Grade 14\n");
-        break;
-        case 15: printf("Grade 15\n");
-        break;
-        case 16: printf("Grade 16+\n");
-        break;
-        default: printf("Before Grade 1\n");
-        break;
+        case 1:
+            printf("Grade 1\n");
+            break;
+        case 2:
+            printf("Grade 2\n");
+            break;
+        case 3:
+            printf("Grade 3\n");
+            break;
+        case 4:
+            printf("Grade 4\n");
+            break;
+        case 5:
+            printf("Grade 5\n");
+            break;
+        case 6:
+            printf("Grade 6\n");
+            break;
+        case 7:
+            printf("Grade 7\n");
+            break;
+        case 8:
+            printf("Grade 8\n");
+            break;
+        case 9:
+            printf("Grade 9\n");
+            break;
+        case 10:
+            printf("Grade 10\n");
+            break;
+        case 11:
+            printf("Grade 11\n");
+            break;
+        case 12:
+            printf("Grade 12\n");
+            break;
+        case 13:
+            printf("Grade 13\n");
+            break;
+        case 14:
+            printf("Grade 14\n");
+            break;
+        case 15:
+            printf("Grade 15\n");
+            break;
+        case 16:
+            printf("Grade 16+\n");
+            break;
+        default:
+            printf("Before Grade 1\n");
+            break;
 
     }
     /*
