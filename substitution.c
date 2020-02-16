@@ -11,7 +11,6 @@ int main(int argc, string argv[])
         string code[3];
         string plaintext = " ";
         string ciphertext = " ";
-        char text[26];
         code[0] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         code[1] = "abcdefghijklmnopqrstuvwxyz";
         code[2] = "zaqwsxcderfvbgtyhnmjuiklop";
@@ -30,7 +29,7 @@ int main(int argc, string argv[])
             check = check + toupper(argv[1][i]);
         }
         size = strlen(argv[1]);
-        printf("%s %s %i %i %i \n", plaintext, argv[1], validletter, check, aux[2]);
+        //printf("%s %s %i %i %i \n", plaintext, argv[1], validletter, check, aux[2]);
 
 
         if (size != 26 || validletter != 26 || check != 2015)
@@ -41,7 +40,9 @@ int main(int argc, string argv[])
         else
         {
             plaintext = get_string("plaintext: ");
-            for (int i = 0, n = strlen(plaintext); i <= n; i++)
+            int k = strlen(plaintext);
+            char text[k];
+            for (int i = 0; i <= k; i++)
             {
                 for (int j = 0; j < 26; j++)
                 {
