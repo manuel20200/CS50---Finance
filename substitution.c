@@ -40,7 +40,7 @@ int main(int argc, string argv[])
         }
         else
         {
-            plaintext = get_string("Plaintext: ");
+            plaintext = get_string("plaintext: ");
             for (int i = 0, n = strlen(plaintext); i <= n; i++)
             {
                 for (int j = 0; j < 26; j++)
@@ -61,7 +61,7 @@ int main(int argc, string argv[])
                     }
                 }
             }
-            printf("Cyphertext: ");
+            printf("ciphertext: ");
             for (int i = 0, n = strlen(plaintext); i < n; i++)
             {
                 printf("%c",text[i]);
@@ -74,6 +74,7 @@ int main(int argc, string argv[])
         printf("Please digit a valid command.\n");
         return 1;
     }
+    return 0;
 }
 
 
