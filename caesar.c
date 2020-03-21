@@ -84,7 +84,7 @@ int main(int argc, string argv[])
 
 
 
-        printf("Ciphertext: %s\n", ciphertext);
+        printf("ciphertext: %s\n", ciphertext);
         //printf("%i %i %i %i \n", key, size, numero[0], numero[1]);
         return 0;
     }
