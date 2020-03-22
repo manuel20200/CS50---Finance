@@ -88,7 +88,7 @@ void print_winner(void)
     int second = 0; //candidate in second place
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].votes > winner)
+        if (candidates[i].votes > candidates[winner].votes)
         {
             winner = i;
         }
