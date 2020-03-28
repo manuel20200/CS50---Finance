@@ -118,10 +118,7 @@ bool vote(int rank, string name, int ranks[])
             */
             return true;
         }
-
-
     }
-
     return false;
 }
 
@@ -207,17 +204,15 @@ void sort_pairs(void)
                 pairs[i - 1] = pairs[i];
                 pairs[i] = pairtemp;
                 sorted = false;
-
             }
         }
-
     }
-/*
+    /*
     for (int i = 0; i < (candidate_count * ((candidate_count - 1)) / 2); i++)
     {
         printf("%i %i\n", pairs[i].winner, pairs[i].loser);
     }
-*/
+    */
     return;
 }
 
@@ -247,7 +242,6 @@ void lock_pairs(void)
                 }
             }
         }
-
         column_zero = 0;
         for (int i = 0; i < candidate_count; i++)
         {
@@ -255,10 +249,9 @@ void lock_pairs(void)
             {
                 column_zero++;
             }
-            printf("%i %i ok \n", column_zero, i);
-
+            //printf("%i %i ok \n", column_zero, i);
         }
-        printf("%i OUT \n",column_zero);
+        //printf("%i OUT \n",column_zero);
         if (column_zero == 0)
         {
             locked[pairs[k].winner][pairs[k].loser] = false;
@@ -273,7 +266,6 @@ void lock_pairs(void)
             }
         }
     }
-
 /*
     for (int i = 0; i < candidate_count; i++)
     {
