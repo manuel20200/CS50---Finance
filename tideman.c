@@ -212,12 +212,12 @@ void sort_pairs(void)
         }
 
     }
-    /*
+/*
     for (int i = 0; i < (candidate_count * ((candidate_count - 1)) / 2); i++)
     {
         printf("%i %i\n", pairs[i].winner, pairs[i].loser);
     }
-    */
+*/
     return;
 }
 
@@ -225,44 +225,50 @@ void sort_pairs(void)
 void lock_pairs(void)
 {
     int arrow_zero = 0;
-    int arrow_edge = 0;
     int arrows[candidate_count];
-    for (int i = 0; i < candidate_count; i++)
-    {
-        arrows[i] = 0;
-    }
+
     // filling locked array
     for (int k = 0; k < pair_count; k++)
     {
         locked[pairs[k].winner][pairs[k].loser] = true;
         locked[pairs[k].loser][pairs[k].winner] = false;
-
-    }
-    for (int j = 0; j < candidate_count; j++)
-    {
         for (int i = 0; i < candidate_count; i++)
         {
-            if (locked[i][j] == 1)
+            arrows[i] = 0;
+        }
+        //calculating number of 1 in a column (every candidate)
+        for (int j = 0; j < candidate_count; j++)
+        {
+            for (int i = 0; i < candidate_count; i++)
             {
-                arrows[j]++;
-
+                if (locked[i][j] == 1)
+                {
+                    arrows[j]++;
+                }
             }
         }
-    }
-    for (int m = 0; m < candidate_count; m++)
-    {
-        if (arrows[m] == 0)
+        arrow_zero = 0;
+        for (int i = 0; i < candidate_count; i++)
         {
-            arrow_edge = m;
-            winnernumber = m;
-            arrow_zero++;
+            if (arrows[i] == 0)
+            {
+                winnernumber = i;
+            }
+            else if (arrows[i] != 0)
+            {
+                arrow_zero++;
+            }
+            //printf("%i %i ok \n", arrow_zero, i);
+
+        }
+        if (arrow_zero == candidate_count)
+        {
+            locked[pairs[k].winner][pairs[k].loser] = false;
+            locked[pairs[k].loser][pairs[k].winner] = false;
         }
     }
-    if (arrow_zero == 1)
-    {
-        //break;
-    }
-    /*
+
+/*
     for (int i = 0; i < candidate_count; i++)
     {
         for (int j = 0; j < candidate_count; j++)
@@ -271,13 +277,13 @@ void lock_pairs(void)
         }
         printf("\n");
     }
-    */
-    /*
+
+
     for (int i = 0; i < candidate_count; i++)
     {
         printf("%i \n", arrows[i]);
     }
-    */
+*/
     return;
 }
 
