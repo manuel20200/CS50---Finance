@@ -263,6 +263,7 @@ void lock_pairs(void)
         {
             locked[pairs[k].winner][pairs[k].loser] = false;
             locked[pairs[k].loser][pairs[k].winner] = false;
+            column_zero++;
         }
         for (int i = 0; i < candidate_count; i++)
         {
