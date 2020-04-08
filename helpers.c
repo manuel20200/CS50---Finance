@@ -161,9 +161,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     int avgGy = 0;
     int avgBx = 0;
     int avgBy = 0;
-    int aa, aaa, aaaa;
-    int a0, a1, a2, a3, a4, a5, a6;
-    char a7 = 9;
     double Redxy;
     double Greenxy;
     double Bluexy;
@@ -180,42 +177,182 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 (image[i][j - 1].rgbtRed * gx[1][0]) + (image[i][j + 1].rgbtRed * gx[1][2]) +
                 (image[i + 1][j - 1].rgbtRed * gx[2][0]) + (image[i + 1][j + 1].rgbtRed * gx[2][2]);
 
-            avgRy = (image[i - 1][j - 1].rgbtRed * gy[0][0]) + (image[i - 1][j + 1].rgbtRed * gy[0][2]) +
-                (image[i][j - 1].rgbtRed * gy[1][0]) + (image[i][j + 1].rgbtRed * gy[1][2]) +
-                (image[i + 1][j - 1].rgbtRed * gy[2][0]) + (image[i + 1][j + 1].rgbtRed * gy[2][2]);
+            avgRy = (image[i - 1][j - 1].rgbtRed * gy[0][0]) + (image[i + 1][j - 1].rgbtRed * gy[2][0]) +
+                (image[i - 1][j].rgbtRed * gy[0][1]) + (image[i + 1][j].rgbtRed * gy[2][1]) +
+                (image[i - 1][j + 1].rgbtRed * gy[0][2]) + (image[i + 1][j + 1].rgbtRed * gy[2][2]);
 
             avgGx = (image[i - 1][j - 1].rgbtGreen * gx[0][0]) + (image[i - 1][j + 1].rgbtGreen * gx[0][2]) +
                 (image[i][j - 1].rgbtGreen * gx[1][0]) + (image[i][j + 1].rgbtGreen * gx[1][2]) +
                 (image[i + 1][j - 1].rgbtGreen * gx[2][0]) + (image[i + 1][j + 1].rgbtGreen * gx[2][2]);
 
-            avgGy = (image[i - 1][j - 1].rgbtGreen * gy[0][0]) + (image[i - 1][j + 1].rgbtGreen * gy[0][2]) +
-                (image[i][j - 1].rgbtGreen * gy[1][0]) + (image[i][j + 1].rgbtGreen * gy[1][2]) +
-                (image[i + 1][j - 1].rgbtGreen * gy[2][0]) + (image[i + 1][j + 1].rgbtGreen * gy[2][2]);
+            avgGy = (image[i - 1][j - 1].rgbtGreen * gy[0][0]) + (image[i + 1][j - 1].rgbtGreen * gy[2][0]) +
+                (image[i - 1][j].rgbtGreen * gy[0][1]) + (image[i + 1][j].rgbtGreen * gy[2][1]) +
+                (image[i - 1][j + 1].rgbtGreen * gy[0][2]) + (image[i + 1][j + 1].rgbtGreen * gy[2][2]);
 
             avgBx = (image[i - 1][j - 1].rgbtBlue * gx[0][0]) + (image[i - 1][j + 1].rgbtBlue * gx[0][2]) +
                 (image[i][j - 1].rgbtBlue * gx[1][0]) + (image[i][j + 1].rgbtBlue * gx[1][2]) +
                 (image[i + 1][j - 1].rgbtBlue * gx[2][0]) + (image[i + 1][j + 1].rgbtBlue * gx[2][2]);
 
-            avgBy = (image[i - 1][j - 1].rgbtBlue * gy[0][0]) + (image[i - 1][j + 1].rgbtBlue * gy[0][2]) +
-                (image[i][j - 1].rgbtBlue * gy[1][0]) + (image[i][j + 1].rgbtBlue * gy[1][2]) +
-                (image[i + 1][j - 1].rgbtBlue * gy[2][0]) + (image[i + 1][j + 1].rgbtBlue * gy[2][2]);
+            avgBy = (image[i - 1][j - 1].rgbtBlue * gy[0][0]) + (image[i + 1][j - 1].rgbtBlue * gy[2][0]) +
+                (image[i - 1][j].rgbtBlue * gy[0][1]) + (image[i + 1][j].rgbtBlue * gy[2][1]) +
+                (image[i - 1][j + 1].rgbtBlue * gy[0][2]) + (image[i + 1][j + 1].rgbtBlue * gy[2][2]);
             }
 
-            aa = image[i][j].rgbtRed;
-            aaa = image[i][j - 1].rgbtRed;
-            aaaa = image[i][j + 1].rgbtRed;
+            //top left corner
+            else if (i == 0 && j == 0)
+            {
+            avgRx = (image[i][j + 1].rgbtRed * gx[1][2]) + (image[i + 1][j + 1].rgbtRed * gx[2][2]);
 
-            a0 = image[i - 1][j - 1].rgbtRed * gx[0][0];
-            a1 = image[i - 1][j + 1].rgbtRed * gx[0][2];
-            a2 = image[i][j - 1].rgbtRed * gx[1][0];
-            a3 = image[i][j + 1].rgbtRed * gx[1][2];
-            a4 = image[i + 1][j - 1].rgbtRed * gx[2][0];
-            a5 = image[i + 1][j + 1].rgbtRed * gx[2][2];
+            avgRy = (image[i + 1][j].rgbtRed * gy[2][1]) + (image[i + 1][j + 1].rgbtRed * gy[2][2]);
 
+            avgGx = (image[i][j + 1].rgbtGreen * gx[1][2]) + (image[i + 1][j + 1].rgbtGreen * gx[2][2]);
 
-            Redxy = sqrt(pow(avgRx, 2) + pow(avgRy, 2));
-            Greenxy = sqrt(pow(avgGx, 2) + pow(avgGy, 2));
-            Bluexy = sqrt(pow(avgBx, 2) + pow(avgBy, 2));
+            avgGy = (image[i + 1][j].rgbtGreen * gy[2][1]) + (image[i + 1][j + 1].rgbtGreen * gy[2][2]);
+
+            avgBx = (image[i][j + 1].rgbtBlue * gx[1][2]) + (image[i + 1][j + 1].rgbtBlue * gx[2][2]);
+
+            avgBy = (image[i + 1][j].rgbtBlue * gy[2][1]) + (image[i + 1][j + 1].rgbtBlue * gy[2][2]);
+            }
+
+            //top right corner
+            else if (i == 0 && j == (width - 1))
+            {
+            avgRx = (image[i][j - 1].rgbtRed * gx[1][0]) + (image[i + 1][j - 1].rgbtRed * gx[2][0]);
+
+            avgRy = (image[i + 1][j - 1].rgbtRed * gy[2][0]) + (image[i + 1][j].rgbtRed * gy[2][1]);
+
+            avgGx = (image[i][j - 1].rgbtGreen * gx[1][0]) + (image[i + 1][j - 1].rgbtGreen * gx[2][0]);
+
+            avgGy = (image[i + 1][j - 1].rgbtGreen * gy[2][0]) + (image[i + 1][j].rgbtGreen * gy[2][1]);
+
+            avgBx = (image[i][j - 1].rgbtBlue * gx[1][0]) + (image[i + 1][j - 1].rgbtBlue * gx[2][0]);
+
+            avgBy = (image[i + 1][j - 1].rgbtBlue * gy[2][0]) + (image[i + 1][j].rgbtBlue * gy[2][1]);
+            }
+
+            //bottom left corner
+            else if (i == (height - 1) && j == 0)
+            {
+            avgRx = (image[i - 1][j + 1].rgbtRed * gx[0][2]) + (image[i][j + 1].rgbtRed * gx[1][2]);
+
+            avgRy = (image[i - 1][j].rgbtRed * gy[0][1]) + (image[i - 1][j + 1].rgbtRed * gy[0][2]);
+
+            avgGx = (image[i - 1][j + 1].rgbtGreen * gx[0][2]) + (image[i][j + 1].rgbtGreen * gx[1][2]);
+
+            avgGy = (image[i - 1][j].rgbtGreen * gy[0][1]) + (image[i - 1][j + 1].rgbtGreen * gy[0][2]);
+
+            avgBx = (image[i - 1][j + 1].rgbtBlue * gx[0][2]) + (image[i][j + 1].rgbtBlue * gx[1][2]);
+
+            avgBy = (image[i - 1][j].rgbtBlue * gy[0][1]) + (image[i - 1][j + 1].rgbtBlue * gy[0][2]);
+            }
+
+            //bottom right corner
+            else if (i == (height - 1) && j == (width - 1))
+            {
+            avgRx = (image[i - 1][j - 1].rgbtRed * gx[0][0]) + (image[i][j - 1].rgbtRed * gx[1][0]);
+
+            avgRy = (image[i - 1][j - 1].rgbtRed * gy[0][0]) + (image[i - 1][j].rgbtRed * gy[0][1]);
+
+            avgGx = (image[i - 1][j - 1].rgbtGreen * gx[0][0]) + (image[i][j - 1].rgbtGreen * gx[1][0]);
+
+            avgGy = (image[i - 1][j - 1].rgbtGreen * gy[0][0]) + (image[i - 1][j].rgbtGreen * gy[0][1]);
+
+            avgBx = (image[i - 1][j - 1].rgbtBlue * gx[0][0]) + (image[i][j - 1].rgbtBlue * gx[1][0]);
+
+            avgBy = (image[i - 1][j - 1].rgbtBlue * gy[0][0]) + (image[i - 1][j].rgbtBlue * gy[0][1]);
+            }
+
+            //left edge side
+            else if (i != 0 && i != (height - 1) && j == 0)
+            {
+            avgRx = (image[i - 1][j + 1].rgbtRed * gx[0][2]) + (image[i][j + 1].rgbtRed * gx[1][2])
+                + (image[i + 1][j + 1].rgbtRed * gx[2][2]);
+
+            avgRy = (image[i - 1][j].rgbtRed * gy[0][1]) + (image[i - 1][j + 1].rgbtRed * gy[0][2])
+                + (image[i + 1][j].rgbtRed * gy[2][1]) + (image[i + 1][j + 1].rgbtRed * gy[2][2]);
+
+            avgGx = (image[i - 1][j + 1].rgbtGreen * gx[0][2]) + (image[i][j + 1].rgbtGreen * gx[1][2])
+                + (image[i + 1][j + 1].rgbtGreen * gx[2][2]);
+
+            avgGy = (image[i - 1][j].rgbtGreen * gy[0][1]) + (image[i - 1][j + 1].rgbtGreen * gy[0][2])
+                + (image[i + 1][j].rgbtGreen * gy[2][1]) + (image[i + 1][j + 1].rgbtGreen * gy[2][2]);
+
+            avgBx = (image[i - 1][j + 1].rgbtBlue * gx[0][2]) + (image[i][j + 1].rgbtBlue * gx[1][2])
+                + (image[i + 1][j + 1].rgbtBlue * gx[2][2]);
+
+            avgBy = (image[i - 1][j].rgbtBlue * gy[0][1]) + (image[i - 1][j + 1].rgbtBlue * gy[0][2])
+                + (image[i + 1][j].rgbtBlue * gy[2][1]) + (image[i + 1][j + 1].rgbtBlue * gy[2][2]);
+            }
+
+            //right edge side
+            else if (i != 0 && i != (height - 1) && j == (width - 1))
+            {
+            avgRx = (image[i - 1][j - 1].rgbtRed * gx[0][0]) + (image[i][j - 1].rgbtRed * gx[1][0])
+                + (image[i + 1][j - 1].rgbtRed * gx[2][0]);
+
+            avgRy = (image[i - 1][j - 1].rgbtRed * gy[0][0]) + (image[i - 1][j].rgbtRed * gy[0][1])
+                + (image[i + 1][j - 1].rgbtRed * gy[2][0]) + (image[i + 1][j].rgbtRed * gy[2][1]);
+
+            avgGx = (image[i - 1][j - 1].rgbtGreen * gx[0][0]) + (image[i][j - 1].rgbtGreen * gx[1][0])
+                + (image[i + 1][j - 1].rgbtGreen * gx[2][0]);
+
+            avgGy = (image[i - 1][j - 1].rgbtGreen * gy[0][0]) + (image[i - 1][j].rgbtGreen * gy[0][1])
+                + (image[i + 1][j - 1].rgbtGreen * gy[2][0]) + (image[i + 1][j].rgbtGreen * gy[2][1]);
+
+            avgBx = (image[i - 1][j - 1].rgbtBlue * gx[0][0]) + (image[i][j - 1].rgbtBlue * gx[1][0])
+                + (image[i + 1][j - 1].rgbtBlue * gx[2][0]);
+
+            avgBy = (image[i - 1][j - 1].rgbtBlue * gy[0][0]) + (image[i - 1][j].rgbtBlue * gy[0][1])
+                + (image[i + 1][j - 1].rgbtBlue * gy[2][0]) + (image[i + 1][j].rgbtBlue * gy[2][1]);
+            }
+
+            //top edge side
+            else if (i == 0 && j != 0 && j != (width - 1))
+            {
+            avgRx = (image[i][j - 1].rgbtRed * gx[1][0]) + (image[i][j + 1].rgbtRed * gx[1][2])
+                + (image[i + 1][j - 1].rgbtRed * gx[2][0]) + (image[i + 1][j + 1].rgbtRed * gx[2][2]);
+
+            avgRy = (image[i + 1][j - 1].rgbtRed * gy[2][0]) + (image[i + 1][j].rgbtRed * gy[2][1])
+                + (image[i + 1][j + 1].rgbtRed * gy[2][2]);
+
+            avgGx = (image[i][j - 1].rgbtGreen * gx[1][0]) + (image[i][j + 1].rgbtGreen * gx[1][2])
+                + (image[i + 1][j - 1].rgbtGreen * gx[2][0]) + (image[i + 1][j + 1].rgbtGreen * gx[2][2]);
+
+            avgGy = (image[i + 1][j - 1].rgbtGreen * gy[2][0]) + (image[i + 1][j].rgbtGreen * gy[2][1])
+                + (image[i + 1][j + 1].rgbtGreen * gy[2][2]);
+
+            avgBx = (image[i][j - 1].rgbtBlue * gx[1][0]) + (image[i][j + 1].rgbtBlue * gx[1][2])
+                + (image[i + 1][j - 1].rgbtBlue * gx[2][0]) + (image[i + 1][j + 1].rgbtBlue * gx[2][2]);
+
+            avgBy = (image[i + 1][j - 1].rgbtBlue * gy[2][0]) + (image[i + 1][j].rgbtBlue * gy[2][1])
+                + (image[i + 1][j + 1].rgbtBlue * gy[2][2]);
+            }
+
+            //bottom edge side
+            else if (i == (height - 1) && j != 0 && j != (width - 1))
+            {
+            avgRx = (image[i - 1][j - 1].rgbtRed * gx[0][0]) + (image[i - 1][j + 1].rgbtRed * gx[0][2])
+                + (image[i][j - 1].rgbtRed * gx[1][0]) + (image[i][j + 1].rgbtRed * gx[1][2]);
+
+            avgRy = (image[i - 1][j - 1].rgbtRed * gy[0][0]) + (image[i - 1][j].rgbtRed * gy[0][1])
+                + (image[i - 1][j + 1].rgbtRed * gy[0][2]);
+
+            avgGx = (image[i - 1][j - 1].rgbtGreen * gx[0][0]) + (image[i - 1][j + 1].rgbtGreen * gx[0][2])
+                + (image[i][j - 1].rgbtGreen * gx[1][0]) + (image[i][j + 1].rgbtGreen * gx[1][2]);
+
+            avgGy = (image[i - 1][j - 1].rgbtGreen * gy[0][0]) + (image[i - 1][j].rgbtGreen * gy[0][1])
+                + (image[i - 1][j + 1].rgbtGreen * gy[0][2]);
+
+            avgBx = (image[i - 1][j - 1].rgbtBlue * gx[0][0]) + (image[i - 1][j + 1].rgbtBlue * gx[0][2])
+                + (image[i][j - 1].rgbtBlue * gx[1][0]) + (image[i][j + 1].rgbtBlue * gx[1][2]);
+
+            avgBy = (image[i - 1][j - 1].rgbtBlue * gy[0][0]) + (image[i - 1][j].rgbtBlue * gy[0][1])
+                + (image[i - 1][j + 1].rgbtBlue * gy[0][2]);
+            }
+
+            Redxy = round(sqrt(pow(avgRx, 2) + pow(avgRy, 2)));
+            Greenxy = round(sqrt(pow(avgGx, 2) + pow(avgGy, 2)));
+            Bluexy = round(sqrt(pow(avgBx, 2) + pow(avgBy, 2)));
             //printf("%f %f %f \n", Redxy, Greenxy, Bluexy);
 
             //check red pixel value
@@ -254,11 +391,15 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int j = 0; j < width; j++)
         {
+            //printf("%i %i %i\n",image[i][j].rgbtRed, image[i][j].rgbtGreen, image[i][j].rgbtBlue);
             image[i][j].rgbtRed = imagetemp[i][j].rgbtRed;
             image[i][j].rgbtGreen = imagetemp[i][j].rgbtGreen;
             image[i][j].rgbtBlue = imagetemp[i][j].rgbtBlue;
+            //printf("%i %i %i R\n",image[i][j].rgbtRed, image[i][j].rgbtGreen, image[i][j].rgbtBlue);
         }
     }
+
+
 
     free(imagetemp);
 
