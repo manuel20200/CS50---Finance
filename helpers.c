@@ -174,7 +174,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
         for (int j = 0; j < width; j++)
         {
             //edge no borders pixels
-            if (i > 0 && j > 0 && i < (height - 2) && j < (width - 2))
+            if (i > 0 && j > 0 && i < (height - 1) && j < (width - 1))
             {
             avgRx = (image[i - 1][j - 1].rgbtRed * gx[0][0]) + (image[i - 1][j + 1].rgbtRed * gx[0][2]) +
                 (image[i][j - 1].rgbtRed * gx[1][0]) + (image[i][j + 1].rgbtRed * gx[1][2]) +
@@ -199,6 +199,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             avgBy = (image[i - 1][j - 1].rgbtBlue * gy[0][0]) + (image[i - 1][j + 1].rgbtBlue * gy[0][2]) +
                 (image[i][j - 1].rgbtBlue * gy[1][0]) + (image[i][j + 1].rgbtBlue * gy[1][2]) +
                 (image[i + 1][j - 1].rgbtBlue * gy[2][0]) + (image[i + 1][j + 1].rgbtBlue * gy[2][2]);
+            }
 
             aa = image[i][j].rgbtRed;
             aaa = image[i][j - 1].rgbtRed;
@@ -245,9 +246,6 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
                 imagetemp[i][j].rgbtBlue = Bluexy;
             }
 
-
-
-            }
 
         }
     }
