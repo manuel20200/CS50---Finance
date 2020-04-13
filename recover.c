@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
             open = 1;
             fwrite(bytes, sizeof(char), 512, img);
         }
+        //write block (512bytes) that is not a jpg file start
         else if (open == 1)
         {
 
@@ -71,6 +72,7 @@ int main(int argc, char *argv[])
         //int retorno = fread(arr, sizeof(char), 512, file);
         retorno = fread(bytes, sizeof(char), 512, file);
     }
+    //close files
     fclose(img);
     fclose(file);
 
