@@ -31,9 +31,7 @@ int main(int argc, char *argv[])
     //check for all card.raw every 512bytes for jpgs
     while (retorno != 0)
     {
-        //int retorno = fread(arr, sizeof(char), 512, file);
         int dir = ftell(file);
-        retorno = fread(bytes, sizeof(char), 512, file);
         dir = ftell(file);
         //printf("%i -------------------------------------------- \n", retorno);
 
@@ -60,7 +58,7 @@ int main(int argc, char *argv[])
                     fprintf(stderr, "Could not open img %s.\n", filename);
                     return 4;
                 }
-
+                //open indicate if there is a jpg file open
                 open = 1;
                 fwrite(bytes, sizeof(char), 512, img);
             }
@@ -71,6 +69,8 @@ int main(int argc, char *argv[])
 
             }
         }
+        //int retorno = fread(arr, sizeof(char), 512, file);
+        retorno = fread(bytes, sizeof(char), 512, file);
     }
     fclose(img);
     fclose(file);
