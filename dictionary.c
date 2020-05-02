@@ -29,8 +29,12 @@ unsigned int sizeW = 0;
 bool check(const char *word)
 {
     int res = hash(word);
+    int equ = 0;
+    int found = 0;
     char wordT[50];
     char dicw[50];
+    int dim = strlen(word);
+    int dimD = 0;
 
     //clean register for text words
     for (int i = 0; i < 50; i++)
@@ -38,8 +42,10 @@ bool check(const char *word)
         wordT[i] = ' ';
     }
 
+    //printf("word: %s \n", word);
+
     //convert all word characters in lowercases
-    for (int i = 0, len = strlen(word); i < len; i++)
+    for (int i = 0; i < dim; i++)
     {
         wordT[i] = tolower(word[i]);
     }
@@ -54,21 +60,58 @@ bool check(const char *word)
         }
 
         //convert all point characters in lowercases
-        for (int i = 0, len = strlen(point->word); i < len; i++)
+        dimD = strlen(point->word);
+        for (int i = 0; i < dimD; i++)
         {
             dicw[i] = tolower(point->word[i]);
         }
 
-        int found = strcmp (dicw, wordT);
-        if (found == 0)
+        /*
+        for (int i = 0; i < 10; i++)
+        {
+            printf("%c", wordT[i]);
+        }
+        printf("  ");
+        for (int i = 0; i < 10; i++)
+        {
+            printf("%c", dicw[i]);
+        }
+        */
+
+        //found = strcmp (dicw, wordT);
+        equ = 0;
+        for (int i = 0; i < dim; i++)
+        {
+            if (dicw[i] == wordT[i])
+            {
+                equ++;
+            }
+        }
+
+        if (dim == equ && dim == dimD)
+        {
+            found = 99;
+        }
+        else
+        {
+            found = 33;
+        }
+
+        //printf("\n%i\n", found);
+
+
+
+        if (found == 99)
         {
 
             return true;
         }
+
+
     }
 
-    // TODO
     return false;
+
 }
 
 // Hashes word to a number
