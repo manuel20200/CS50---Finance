@@ -17,7 +17,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 676;
+const unsigned int N = 17576;
 
 // Hash table  check two first letters 26x26
 node *table[N];
@@ -28,13 +28,14 @@ unsigned int sizeW = 0;
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    int res = hash(word);
+    int res = 0;
     int equ = 0;
     int found = 0;
     char wordT[50];
     char dicw[50];
     int dim = strlen(word);
     int dimD = 0;
+    //node *point = NULL;
 
     //clean register for text words
     for (int i = 0; i < 50; i++)
@@ -45,10 +46,12 @@ bool check(const char *word)
     //printf("word: %s \n", word);
 
     //convert all word characters in lowercases
-    for (int i = 0; i < dim; i++)
+    for (int i = 0; word[i] != '\000'; i++)
     {
         wordT[i] = tolower(word[i]);
     }
+
+    res = hash(wordT);
 
     //check all the linked list
     for (node *point = table[res]; point != NULL; point = point->next)
@@ -103,8 +106,7 @@ bool check(const char *word)
 
         if (found == 99)
         {
-
-            return true;
+           return true;
         }
 
 
@@ -122,24 +124,35 @@ unsigned int hash(const char *word)
     //check first word letter
     if (word[0] >= 65 && word[0] <= 90)
     {
-        dir = (word[0] - 65) * 26;
+        dir = (word[0] - 65) * 676;
     }
 
     if (word[0] >= 97 && word[0] <= 122)
     {
-        dir = (word[0] - 97) * 26;
+        dir = (word[0] - 97) * 676;
     }
+
     //check second word letter
     if (word[1] >= 65 && word[1] <= 90)
     {
-        dir = dir + (word[1] - 65);
+        dir = dir + (word[1] - 65) * 26;
     }
 
     if (word[1] >= 97 && word[1] <= 122)
     {
-        dir = dir + (word[1] - 97);
+        dir = dir + (word[1] - 97) * 26;
     }
 
+    //check third word letter
+    if (word[2] >= 65 && word[2] <= 90)
+    {
+        dir = dir + (word[2] - 65);
+    }
+
+    if (word[2] >= 97 && word[2] <= 122)
+    {
+        dir = dir + (word[2] - 97);
+    }
 
     // TODO
     return dir;
@@ -148,12 +161,12 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    int dir = 0;
+    int dirL = 0;
     int a = 0;
     char characters_a[26];
     char characters_A[26];
     char wordD[50];
-    node *tmp = NULL;
+    //node *tmp = NULL;
 
     //set all table pointers to NULL
     for (int i = 0; i < N; i++)
@@ -179,7 +192,7 @@ bool load(const char *dictionary)
     while (a != EOF)
     {
         a = fscanf(file, "%s", wordD);
-        dir = 0;
+
         //printf("%s \n", wordD);
 
         if (a == EOF)
@@ -190,28 +203,9 @@ bool load(const char *dictionary)
         //Count number of words load from the dictionary
         sizeW++;
 
-        //check first word letter
-        if (wordD[0] >= 65 && wordD[0] <= 90)
-        {
-            dir = (wordD[0] - 65) * 26;
-        }
+        dirL = hash(wordD);
 
-        if (wordD[0] >= 97 && wordD[0] <= 122)
-        {
-            dir = (wordD[0] - 97) * 26;
-        }
-        //check second word letter
-        if (wordD[1] >= 65 && wordD[1] <= 90)
-        {
-            dir = dir + (wordD[1] - 65);
-        }
-
-        if (wordD[1] >= 97 && wordD[1] <= 122)
-        {
-            dir = dir + (wordD[1] - 97);
-        }
-
-
+        //allocate memory for every dictionary word
         node *n = malloc(sizeof(node));
         if (n == NULL)
         {
@@ -220,15 +214,15 @@ bool load(const char *dictionary)
 
 
 
-        if (table[dir] == NULL)
+        if (table[dirL] == NULL)
         {
-            table[dir] = n;
+            table[dirL] = n;
             strcpy(n->word, wordD);
         }
         else
         {
-            n->next = table[dir];
-            table[dir] = n;
+            n->next = table[dirL];
+            table[dirL] = n;
             strcpy(n->word, wordD);
         }
 
