@@ -67,6 +67,11 @@ int main(int argc, char *argv[])
     int index = 0, misspellings = 0, words = 0;
     char word[LENGTH + 1];
 
+    for (int i = 0; i < (LENGTH + 1); i++)
+    {
+        word[i] = '\000';
+    }
+
     // Spell-check each word in text
     for (int c = fgetc(file); c != EOF; c = fgetc(file))
     {
