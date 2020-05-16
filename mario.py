@@ -1,3 +1,4 @@
+#declare variables
 text = 0
 number = 0
 
@@ -33,10 +34,6 @@ for i in range(number):
     #print right side #
     for l  in range(i + 1):
         print("#", end = ''),
+    #print new line
+    print()
 
-    #print right side spaces
-    for m in range(space):
-        print(" ", end = ''),
-    #finish print actual level and jump to the next one
-    else:
-        print("")
