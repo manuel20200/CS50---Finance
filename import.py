@@ -30,7 +30,7 @@ with open(argv[1]) as csv_file:
         if len(namelist) == 3:
             db.execute("INSERT INTO students (first, middle, last, house, birth) VALUES (?, ?, ?, ?, ?)", namelist[0], namelist[1], namelist[2], row[1], row[2])
         elif len(namelist) == 2:
-            db.execute("INSERT INTO students (first, middle, last, house, birth) VALUES (?, 'NULL', ?, ?, ?)", namelist[0], namelist[1], row[1], row[2])
+            db.execute("INSERT INTO students (first, middle, last, house, birth) VALUES (?, NULL, ?, ?, ?)", namelist[0], namelist[1], row[1], row[2])
         else:
             continue
 
