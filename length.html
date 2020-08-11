@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Unit Converter - length</title>
+    </head>
+
+    <body>
+
+	<!-- Title image -->
+	<div class="titlemain">
+	<img src="Title.PNG" alt="#" width="300" height="100">
+	</div>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<button class="navegacion" onclick="document.location='index.html'">Temperature</button>
+	<button class="navegacion" onclick="document.location='length.html'">Lenght</button>
+	<button class="navegacion" onclick="document.location='pressure.html'">Pressure</button>
+	<button class="navegacion" onclick="document.location='velocity.html'">Velocity</button>
+	</nav>
+
+
+
+	<script>
+
+		function longmt() {
+			  var meter, feet, inch;
+			  meter = Number(document.getElementById("longmt").value);
+			  feet = meter * 3.28084;
+			  inch = meter * 39.37008;
+			  document.getElementById("resultmts").innerHTML = meter + "mts";
+			  document.getElementById("resultfeet").innerHTML = feet.toFixed(2) + "Ft";
+			  document.getElementById("resultInch").innerHTML = inch.toFixed(2) + "Inch";
+			}
+
+
+		function longfeet() {
+			  var meter, feet, inch;
+			  feet = Number(document.getElementById("longfeet").value);
+			  meter = feet * 0.3048;
+			  inch = feet * 12;
+			  document.getElementById("resultmts").innerHTML = meter.toFixed(2) + "mts";
+			  document.getElementById("resultfeet").innerHTML = feet + "Ft";
+			  document.getElementById("resultInch").innerHTML = inch.toFixed(2) + "Inch";
+			}
+
+		function longinch() {
+			  var meter, feet, inch;
+			  inch = Number(document.getElementById("longinch").value);
+			  feet = inch * 0.083333;
+			  meter = inch * 0.0254;
+			  document.getElementById("resultmts").innerHTML = meter.toFixed(2) + "mts";
+			  document.getElementById("resultfeet").innerHTML = feet.toFixed(2) + "Ft";
+			  document.getElementById("resultInch").innerHTML = inch + "Inch";
+			}
+
+	</script>
+
+
+
+	<div class="div1">
+	<p>Convert from</p>
+	<input class="entradas" id="longmt" value="100">mts-</input> <button onclick="longmt()">Convert</button>
+	<input class="entradas" id="longfeet" value="328">ft---</input> <button onclick="longfeet()">Convert</button>
+	<input class="entradas" id="longinch" value="3937">inch</input> <button onclick="longinch()">Convert</button>
+	</div>
+
+	<div class="div2">
+	<p>Convert to</p>
+	<p id="resultmts" class="resultado">mts</p>
+	<p id="resultfeet" class="resultado">ft</p>
+	<p id="resultInch" class="resultado">inch</p>
+	</div>
+
+	<article>
+			<h1>Lenght</h1>
+			<blocInchquote cite="https://en.wikipedia.org/wiki/Length">
+			<p>Length is the term used for indentifying the size of an object or distance from one point to another. Length is a measure of how long an object is or the
+			distance between two points. Length is the measure of one spatial dimension, whereas area is a measure of two dimensions (length squared) and volume
+			is a measure of three dimensions (length cubed).
+			</p>
+			</blocInchquote>
+	</article>
+
+	<div class="space">
+	</div>
+
+	<footer>
+	<b>Powered by Manuel Villadiego</b>
+	</footer>
+
+    </body>
+</html>
