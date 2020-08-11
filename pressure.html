@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Unit Converter - Pressure</title>
+    </head>
+
+<body>
+
+	<!-- Title image -->
+	<div class="titlemain">
+	<img src="Title.PNG" alt="#" width="300" height="100">
+	</div>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<button class="navegacion" onclick="document.location='index.html'">Temperature</button>
+	<button class="navegacion" onclick="document.location='length.html'">Lenght</button>
+	<button class="navegacion" onclick="document.location='pressure.html'">Pressure</button>
+	<button class="navegacion" onclick="document.location='velocity.html'">Velocity</button>
+	</nav>
+
+
+
+	<script>
+
+		function prespsi() {
+			  var psi, bar, pas;
+			  psi= Number(document.getElementById("prespsi").value);
+			  bar = psi * 0.068948;
+			  pas = psi * 6894.757;
+			  document.getElementById("resultpsi").innerHTML = psi + "psi";
+			  document.getElementById("resultbar").innerHTML = bar.toFixed(2) + "bar";
+			  document.getElementById("resultpas").innerHTML = pas.toFixed(2) + "pas";
+			}
+
+
+		function presbar() {
+			  var psi, bar, pas;
+			  bar = Number(document.getElementById("presbar").value);
+			  psi= bar * 14.50377;
+			  pas = bar * 100000;
+			  document.getElementById("resultpsi").innerHTML = psi.toFixed(2) + "psi";
+			  document.getElementById("resultbar").innerHTML = bar + "bar";
+			  document.getElementById("resultpas").innerHTML = pas.toFixed(2) + "pas";
+			}
+
+		function prespas() {
+			  var psi, bar, pas;
+			  pas = Number(document.getElementById("prespas").value);
+			  bar = pas * 0.00001;
+			  psi= pas * 0.000145;
+			  document.getElementById("resultpsi").innerHTML = psi.toFixed(2) + "psi";
+			  document.getElementById("resultbar").innerHTML = bar.toFixed(2) + "bar";
+			  document.getElementById("resultpas").innerHTML = pas + "pas";
+			}
+
+	</script>
+
+
+
+	<div class="div1">
+	<p>Convert from</p>
+	<input class="entradas" id="prespsi" value="14.5">psi-</input> <button onclick="prespsi()">Convert</button>
+	<input class="entradas" id="presbar" value="1">bar-</input> <button onclick="presbar()">Convert</button>
+	<input class="entradas" id="prespas" value="100000">atm</input> <button onclick="prespas()">Convert</button>
+	</div>
+
+	<div class="div2">
+	<p>Convert to</p>
+	<p id="resultpsi" class="resultado">psi</p>
+	<p id="resultbar" class="resultado">bar</p>
+	<p id="resultpas" class="resultado">atm</p>
+	</div>
+
+	<article>
+			<h1>Pressure</h1>
+			<blockquote cite="https://www.britannica.com/science/pressure">
+			<p>Pressure, in the physical sciences, the perpendicular force per unit area, or the stress at a point within a confined fluid. The pressure
+				exerted; i.e., it is one-half pound per square inch. The weight of the atmosfere pushing down on each unit area of Earth's surface constitutes
+				atmosferic pressure, which at sea level is about 15 pounds per square inch. In SI units, pressure is measured in pascals; one pascal equals
+				one newton per square metre. Atmospheric pressure is close to 100,000 pascals.
+			</p>
+			</blockquote>
+	</article>
+
+	<div class="space">
+	</div>
+
+	<footer>
+	<b>Powered by Manuel Villadiego</b>
+	</footer>
+
+	</body>
+</html>

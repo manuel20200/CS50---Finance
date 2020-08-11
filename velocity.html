@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Unit Converter - Velocity</title>
+    </head>
+
+<body>
+
+	<!-- Title image -->
+	<div class="titlemain">
+	<img src="Title.PNG" alt="#" width="300" height="100">
+	</div>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	<button class="navegacion" onclick="document.location='index.html'">Temperature</button>
+	<button class="navegacion" onclick="document.location='length.html'">Lenght</button>
+	<button class="navegacion" onclick="document.location='pressure.html'">Pressure</button>
+	<button class="navegacion" onclick="document.location='velocity.html'">Velocity</button>
+	</nav>
+
+
+
+	<script>
+
+		function speedkph() {
+			  var kph, mph, nudos;
+			  kph = Number(document.getElementById("speedkph").value);
+			  mph = kph * 0.621427;
+			  nudos = kph * 0.540003;
+			  document.getElementById("resultkph").innerHTML = kph + "kph";
+			  document.getElementById("resultmpf").innerHTML = mph.toFixed(2) + "mph";
+			  document.getElementById("resultnudos").innerHTML = nudos.toFixed(2) + "nudos";
+			}
+
+
+		function speedmph() {
+			  var kph, mph, nudos;
+			  mph = Number(document.getElementById("speedmph").value);
+			  kph = mph * 1.6092;
+			  nudos = mph * 0.868974;
+			  document.getElementById("resultkph").innerHTML = kph.toFixed(2) + "kph";
+			  document.getElementById("resultmpf").innerHTML = mph + "mph";
+			  document.getElementById("resultnudos").innerHTML = nudos.toFixed(2) + "nudos";
+			}
+
+		function speednudos() {
+			  var kph, mph, nudos;
+			  nudos = Number(document.getElementById("speednudos").value);
+			  mph = nudos * 1.150783;
+			  kph = nudos * 1.85184;
+			  document.getElementById("resultkph").innerHTML = kph.toFixed(2) + "kph";
+			  document.getElementById("resultmpf").innerHTML = mph.toFixed(2) + "mph";
+			  document.getElementById("resultnudos").innerHTML = nudos + "nudos";
+			}
+
+	</script>
+
+
+
+	<div class="div1">
+	<p>Convert from</p>
+	<input class="entradas" id="speedkph" value="80">kph----</input> <button onclick="speedkph()">Convert</button>
+	<input class="entradas" id="speedmph" value="49">mph---</input> <button onclick="speedmph()">Convert</button>
+	<input class="entradas" id="speednudos" value="43">nudos-</input> <button onclick="speednudos()">Convert</button>
+	</div>
+
+	<div class="div2">
+	<p>Convert to</p>
+	<p id="resultkph" class="resultado">kph</p>
+	<p id="resultmpf" class="resultado">mph</p>
+	<p id="resultnudos" class="resultado">nudos</p>
+	</div>
+
+	<article>
+			<h1>Velocity</h1>
+			<blockquote cite="https://scienceworld.wolfram.com/physics/Temperature.html">
+			<p>The velocity of an object is the rate of change of its position with respect to a frame of reference, and is a function of time. Velocity is
+			equivalent to a specification of an object's speed and direction of motion (e.g. 60 km/h to the north). Velocity is a fundamental concept in kinematics,
+			the branch of classical mechanics that describes the motion of bodies.
+			</p>
+			</blockquote>
+	</article>
+
+	<div class="space">
+	</div>
+
+	<footer>
+	<b>Powered by Manuel Villadiego</b>
+	</footer>
+
+</body>
+</html>
