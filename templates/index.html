@@ -41,7 +41,7 @@
                         <td>User: {{ x["username"] }}</td>
                         <td></td>
                         <td></td>
-                        <td>$ {{ x["cash"] }}</td>
+                        <td>{{ x["cash"] | usd }}</td>
                     </tr>
                 {% endfor %}
                     <tr>
@@ -50,7 +50,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>$ {{ actual_cash }}</td>
+                        <td>{{ actual_cash | usd }}</td>
                     </tr>
             </tbody>
         </table>
