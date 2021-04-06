@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote_Result
+{% endblock %}
+
+{% block main %}
+
+
+    <div class="form-group">
+        <p>A share of {{ name }} ({{ symbol }}) cost ${{ price | usd }} </p>
+    </div>
+    <button type="submit">Quote</button>
+
+
+{% endblock %}
