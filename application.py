@@ -255,7 +255,7 @@ def sell():
         # Actual date
         actual_date = datetime.datetime.now()
         # Get values from form request
-        symbol_sell = request.form.get("symbol_sell")
+        symbol_sell = request.form.get("symbol")
         quantity_sell_aux = request.form.get("shares")
         #Check if quantity is a valid number
         if valid_quantity(quantity_sell_aux) != 0:

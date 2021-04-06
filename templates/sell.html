@@ -8,7 +8,7 @@
 
     <form action="/sell" method="post">
         <div class="form-group">
-            <input list="shares" autocomplete="off" autofocus class="form-control" name="symbol_sell" placeholder="Symbol">
+            <input list="shares" autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol">
                 <datalist id="shares">
                     {% for x in share_list %}
                         <option value="{{ x.share }}">
