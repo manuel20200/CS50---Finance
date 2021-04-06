@@ -206,7 +206,7 @@ def register():
     else:
         username = request.form.get("username")
         password = request.form.get("password")
-        password1 = request.form.get("password1")
+        confirmation = request.form.get("confirmation")
 
         check_word = valid_word(username)
         if check_word != 0:
@@ -220,7 +220,7 @@ def register():
             if x["username"] == username:
                 return apology("User is actually used, choose another one", 403)
 
-        if password != password1:
+        if password != confirmation:
             return apology("Passwords are not equals", 403)
 
         if not(username and username.strip()):
