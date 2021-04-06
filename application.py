@@ -256,7 +256,7 @@ def sell():
         actual_date = datetime.datetime.now()
         # Get values from form request
         symbol_sell = request.form.get("symbol_sell")
-        quantity_sell_aux = request.form.get("quantity")
+        quantity_sell_aux = request.form.get("shares")
         #Check if quantity is a valid number
         if valid_quantity(quantity_sell_aux) != 0:
             return apology("Shares quantity is an invalid number")
@@ -266,15 +266,12 @@ def sell():
 
         quantity_sell = int(quantity_sell_aux)
 
+        #Verify valid quantity for selling
         if quantity_sell <= 0:
             return apology("Invalid share quantity, please text a valid number")
 
         # Check data of actual share
         actual_share = lookup(symbol_sell)
-
-        #Verify valid quantity for buying
-        if quantity_sell <= 0:
-            return apology("Invalid quantity")
 
         #Check if share symbol is valid
         if actual_share is None:
