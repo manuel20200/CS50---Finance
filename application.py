@@ -255,7 +255,7 @@ def sell():
         # Actual date
         actual_date = datetime.datetime.now()
         # Get values from form request
-        symbol_sell = request.form.get("symbol")
+        symbol = request.form.get("symbol")
         quantity_sell_aux = request.form.get("shares")
         #Check if quantity is a valid number
         if valid_quantity(quantity_sell_aux) != 0:
@@ -271,13 +271,13 @@ def sell():
             return apology("Invalid share quantity, please text a valid number")
 
         # Check data of actual share
-        actual_share = lookup(symbol_sell)
+        actual_share = lookup(symbol)
 
         #Check if share symbol is valid
         if actual_share is None:
             return apology("Share symbol is incorrect, please text a valid symbol")
 
-        rows = db.execute("SELECT no_share FROM resume WHERE user_id = ? AND share = ?", session["user_id"], symbol_sell)
+        rows = db.execute("SELECT no_share FROM resume WHERE user_id = ? AND share = ?", session["user_id"], symbol)
 
         #Check if you have enough shares for selling
         if rows[0]["no_share"] >= quantity_sell:
@@ -285,7 +285,7 @@ def sell():
             shares_updated = rows[0]["no_share"] - quantity_sell
             total_sell = quantity_sell * actual_share["price"]
             quantity_sell = quantity_sell * -1
-            db.execute("INSERT INTO transactions (user_id, action, date, share, no_shares, value) VALUES (?, ?, ?, ?, ?, ?)", session["user_id"], "Sell", actual_date, symbol_sell, quantity_sell, total_sell)
+            db.execute("INSERT INTO transactions (user_id, action, date, share, no_shares, value) VALUES (?, ?, ?, ?, ?, ?)", session["user_id"], "Sell", actual_date, symbol, quantity_sell, total_sell)
 
             #Request the actual cash for actual user
             actual_cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
@@ -293,7 +293,7 @@ def sell():
             db.execute("UPDATE users SET cash = ? WHERE id = ?", cash_updated, session["user_id"])
 
             #Update resume table
-            db.execute("UPDATE resume SET no_share = ? WHERE user_id = ? AND share = ?", shares_updated, session["user_id"], symbol_sell)
+            db.execute("UPDATE resume SET no_share = ? WHERE user_id = ? AND share = ?", shares_updated, session["user_id"], symbol)
             return redirect("/")
 
         else:
