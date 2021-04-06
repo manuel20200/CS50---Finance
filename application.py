@@ -79,6 +79,9 @@ def buy():
     else:
         symbol_buy = request.form.get("symbol")
         quantity_buy_aux = request.form.get("shares")
+        
+        if "." in quantity_buy_aux:
+            return apology("Shares quantity should be an integer number", 400)
 
         #Check if quantity field is not empty
         if len(quantity_buy_aux) == 0:
