@@ -2,7 +2,7 @@ import os
 import requests
 import urllib.parse
 
-from flask import redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session
 from functools import wraps
 
 
@@ -79,5 +79,12 @@ def valid_password(password):
             return -1
         else:
             return 0
+
+def valid_quantity(number_string):
+    valid_number = "1234567890"
+    for x in number_string:
+        if x not in valid_number:
+            return -1
+    return 0
 
 
