@@ -78,7 +78,7 @@ def buy():
         return render_template("buy.html")
     else:
         symbol_buy = request.form.get("symbol")
-        quantity_buy_aux = request.form.get("quantity")
+        quantity_buy_aux = request.form.get("shares")
 
         #Check if quantity field is not empty
         if len(quantity_buy_aux) == 0:
