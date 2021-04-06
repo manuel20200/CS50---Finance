@@ -8,7 +8,7 @@
 
 
     <div class="form-group">
-        <p>A share of {{ name }} ({{ symbol }}) cost ${{ price }} </p>
+        <p>A share of {{ name }} ({{ symbol }}) cost ${{ price | usd }} </p>
     </div>
     <button type="submit">Quote</button>
 

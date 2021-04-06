@@ -218,16 +218,16 @@ def register():
         actual_users = db.execute("SELECT username FROM users")
         for x in actual_users:
             if x["username"] == username:
-                return apology("User is actually used, choose another one", 403)
+                return apology("User is actually used, choose another one", 400)
 
         if password != confirmation:
-            return apology("Passwords are not equals", 403)
+            return apology("Passwords are not equals", 400)
 
         if not(username and username.strip()):
-            return apology("Type a username", 403)
+            return apology("Type a username", 400)
 
         if not(password and password.strip()):
-            return apology("Type a password", 403)
+            return apology("Type a password", 400)
 
         #encrypted password by a hash function
         password_hash = generate_password_hash(password)
