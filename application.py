@@ -7,7 +7,7 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required, lookup, usd, valid_word, valid_password, valid_quantity
+from helpers import apology, login_required, lookup, usd, valid_word, valid_password, valid_quantity, valid_symbol
 
 # Configure application
 app = Flask(__name__)
@@ -257,6 +257,11 @@ def sell():
         # Get values from form request
         symbol = request.form.get("symbol")
         quantity_sell_aux = request.form.get("shares")
+
+        #Check valid symbol
+        if valid_symbol(symbol) != 0:
+            return apology("Invalid symbol")
+
         #Check if quantity is a valid number
         if valid_quantity(quantity_sell_aux) != 0:
             return apology("Shares quantity is an invalid number")
@@ -270,6 +275,7 @@ def sell():
         if quantity_sell <= 0:
             return apology("Invalid share quantity, please text a valid number")
 
+        print(symbol)
         # Check data of actual share
         actual_share = lookup(symbol)
 

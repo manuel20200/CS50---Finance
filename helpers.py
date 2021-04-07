@@ -87,4 +87,16 @@ def valid_quantity(number_string):
             return -1
     return 0
 
-
+def valid_symbol(symbol):
+    invalid_caracters = ";, *{}[]"
+    count = 0
+    if symbol is None:
+        return -1
+    for x in invalid_caracters:
+        count = count + 1
+        if x in symbol:
+            return -1
+        else:
+            return 0
+    if count == 0:
+        return -1
