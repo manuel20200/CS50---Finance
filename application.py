@@ -127,7 +127,7 @@ def buy():
                 new_shares = rows[0]["no_share"] + quantity_buy
                 db.execute("UPDATE resume SET no_share = ? WHERE share = ? AND user_id = ?", new_shares, share_buy["symbol"], session["user_id"])
 
-    return redirect("/", quantity_buy=quantity_buy)
+    return redirect("/")
 
 
 @app.route("/history")
