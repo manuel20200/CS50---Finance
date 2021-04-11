@@ -41,7 +41,7 @@ def lookup(symbol):
     # Contact API
     try:
         api_key = os.environ.get("API_KEY")
-        url = f"https://cloud-sse.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}"
+        url = f"https://cloud.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}"
         response = requests.get(url)
         response.raise_for_status()
     except requests.RequestException:
@@ -74,6 +74,8 @@ def valid_word(word):
 
 def valid_password(password):
     invalid_caracters = ";, *{}[]"
+    if not password:
+        return -1
     for y in invalid_caracters:
         if y in password:
             return -1

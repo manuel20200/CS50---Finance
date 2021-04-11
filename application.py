@@ -127,7 +127,7 @@ def buy():
                 new_shares = rows[0]["no_share"] + quantity_buy
                 db.execute("UPDATE resume SET no_share = ? WHERE share = ? AND user_id = ?", new_shares, share_buy["symbol"], session["user_id"])
 
-    return redirect("/")
+    return redirect("/", quantity_buy=quantity_buy)
 
 
 @app.route("/history")
@@ -305,6 +305,32 @@ def sell():
         else:
             return apology("You don't have enough shares for selling, sorry")
 
+@app.route("/configuration", methods=["GET", "POST"])
+@login_required
+def configuration():
+    """Configuration options"""
+    if request.method == "GET":
+        return render_template ("configuration.html")
+    else:
+        password = request.form.get("password")
+        new_password = request.form.get("new_password")
+        confirmation = request.form.get("confirmation")
+
+        rows = db.execute("SELECT username, hash FROM users WHERE id = ?", session["user_id"])
+
+        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+            return apology("Password invalid")
+
+        if request.form.get("new_password") != request.form.get("confirmation"):
+            return apology("new password confirmation is not correct")
+
+        check_password = valid_password(request.form.get("new_password"))
+        if check_password != 0:
+            return apology("new password is not valid, please choose another one")
+
+        db.execute("UPDATE users SET hash = ?", generate_password_hash(request.form.get("new_password")))
+
+    return redirect("/")
 
 def errorhandler(e):
     """Handle error"""
