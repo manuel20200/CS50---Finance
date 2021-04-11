@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+    <div class="form-group">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Share</th>
+                    <th scope="col">No. Shares</th>
+                    <th scope="col">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in historic %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td>{{ row.action }}</td>
+                        <td>{{ row.date }}</td>
+                        <td>{{ row.share }}</td>
+                        <td>{{ row.no_shares }}</td>
+                        <td>{{ row.value | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
