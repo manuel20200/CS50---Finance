@@ -1,5 +1,5 @@
-import os, datetime
-
+import os
+import datetime
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -41,6 +41,7 @@ db = SQL("sqlite:///finance.db")
 if not os.environ.get("API_KEY"):
     raise RuntimeError("API_KEY not set")
 
+
 @app.route("/")
 @login_required
 def index():
@@ -49,23 +50,25 @@ def index():
     print(actual_users)
     actual_cash = actual_users[0]["cash"]
 
-    #actual_session = session["user_id"]
+    # Actual_session = session["user_id"]
     rows = db.execute("SELECT share, name, no_share FROM resume WHERE user_id = ?", session["user_id"])
 
-    #Request actual price of each user share
+    # Request actual price of each user share
     for row in rows:
         actual_price = lookup(row["share"])
 
-        #Check if share symbol is valid
+        # Check if share symbol is valid
         if actual_price is None:
             return apology("Share symbol is incorrect, please text a valid symbol")
 
         no_shares = row["no_share"]
         total = actual_price["price"] * no_shares
         actual_cash = actual_cash + total
-        db.execute("UPDATE resume SET price = ?, total = ? WHERE share = ? AND user_id = ?", actual_price["price"], total, actual_price["symbol"], session["user_id"])
+        db.execute("UPDATE resume SET price = ?, total = ? WHERE share = ? AND user_id = ?",
+                   actual_price["price"], total, actual_price["symbol"], session["user_id"])
 
-    rows = db.execute("SELECT id, share, name, no_share, price, total FROM resume WHERE user_id = ? AND no_share > 0", session["user_id"])
+    rows = db.execute(
+        "SELECT id, share, name, no_share, price, total FROM resume WHERE user_id = ? AND no_share > 0", session["user_id"])
 
     return render_template("index.html", actual_users=actual_users, rows=rows, actual_cash=actual_cash)
 
@@ -83,49 +86,52 @@ def buy():
         if valid_quantity(quantity_buy_aux) != 0:
             return apology("Shares quantity is an invalid number")
 
-
-        #Check if quantity field is not empty
+        # Check if quantity field is not empty
         if len(quantity_buy_aux) == 0:
             return apology("Quantity field is empty, please text a value")
 
         quantity_buy = int(quantity_buy_aux)
 
-        #Check is quantity field is not a negative number nor zero
+        # Check is quantity field is not a negative number nor zero
         if quantity_buy <= 0:
             return apology("Invalid share quantity, please text a valid number")
 
         share_buy = lookup(symbol_buy)
 
-        #Verify valid quantity for buying
+        # Verify valid quantity for buying
         if quantity_buy <= 0:
             return apology("Invalid quantity")
 
-        #Check if share symbol is valid
+        # Check if share symbol is valid
         if share_buy is None:
             return apology("Share symbol is incorrect, please text a valid symbol")
 
-        #Calculate total cash for buying
+        # Calculate total cash for buying
         total_buy = quantity_buy * share_buy["price"]
         # Actual date
         actual_date = datetime.datetime.now()
 
         rows = db.execute("SELECT cash FROM users WHERE id=?", session["user_id"])
 
-        #Check if you have enough cash for buying
+        # Check if you have enough cash for buying
         if total_buy > rows[0]["cash"]:
             return apology("You don't have enough cash for buying these shares")
         else:
             new_total = rows[0]["cash"] - total_buy
             db.execute("UPDATE users SET cash = ? WHERE id = ?", new_total, session["user_id"])
-            db.execute("INSERT INTO transactions (user_id, action, date, share, no_shares, value) VALUES (?, ?, ?, ?, ?, ?)", session["user_id"], "Buy", actual_date, share_buy["symbol"], quantity_buy, total_buy )
+            db.execute("INSERT INTO transactions (user_id, action, date, share, no_shares, value) VALUES (?, ?, ?, ?, ?, ?)",
+                       session["user_id"], "Buy", actual_date, share_buy["symbol"], quantity_buy, total_buy)
 
-            rows = db.execute("SELECT share, no_share FROM resume WHERE share = ? AND user_id = ?", share_buy["symbol"], session["user_id"])
+            rows = db.execute("SELECT share, no_share FROM resume WHERE share = ? AND user_id = ?",
+                              share_buy["symbol"], session["user_id"])
 
             if len(rows) == 0:
-                db.execute("INSERT INTO resume (user_id, share, name, no_share) VALUES (?, ?, ?, ?)", session["user_id"], share_buy["symbol"], share_buy["name"], quantity_buy)
+                db.execute("INSERT INTO resume (user_id, share, name, no_share) VALUES (?, ?, ?, ?)",
+                           session["user_id"], share_buy["symbol"], share_buy["name"], quantity_buy)
             else:
                 new_shares = rows[0]["no_share"] + quantity_buy
-                db.execute("UPDATE resume SET no_share = ? WHERE share = ? AND user_id = ?", new_shares, share_buy["symbol"], session["user_id"])
+                db.execute("UPDATE resume SET no_share = ? WHERE share = ? AND user_id = ?",
+                           new_shares, share_buy["symbol"], session["user_id"])
 
     return redirect("/")
 
@@ -134,7 +140,8 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    historic = db.execute("SELECT id, action, date, share, no_shares, value FROM transactions WHERE user_id = ?", session["user_id"])
+    historic = db.execute(
+        "SELECT id, action, date, share, no_shares, value FROM transactions WHERE user_id = ?", session["user_id"])
     return render_template("history.html", historic=historic)
 
 
@@ -196,7 +203,7 @@ def quote():
         symbol = request.form.get("symbol")
         actual_share = lookup(symbol)
 
-        #Check if share symbol is valid
+        # Check if share symbol is valid
         if actual_share is None:
             return apology("Share symbol is incorrect, please text a valid symbol")
 
@@ -233,7 +240,7 @@ def register():
         if not(password and password.strip()):
             return apology("Type a password", 400)
 
-        #encrypted password by a hash function
+        # Encrypted password by a hash function
         password_hash = generate_password_hash(password)
 
         db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, password_hash)
@@ -258,11 +265,11 @@ def sell():
         symbol = request.form.get("symbol")
         quantity_sell_aux = request.form.get("shares")
 
-        #Check valid symbol
+        # Check valid symbol
         if valid_symbol(symbol) != 0:
             return apology("Invalid symbol")
 
-        #Check if quantity is a valid number
+        # Check if quantity is a valid number
         if valid_quantity(quantity_sell_aux) != 0:
             return apology("Shares quantity is an invalid number")
 
@@ -271,7 +278,7 @@ def sell():
 
         quantity_sell = int(quantity_sell_aux)
 
-        #Verify valid quantity for selling
+        # Verify valid quantity for selling
         if quantity_sell <= 0:
             return apology("Invalid share quantity, please text a valid number")
 
@@ -279,38 +286,40 @@ def sell():
         # Check data of actual share
         actual_share = lookup(symbol)
 
-        #Check if share symbol is valid
+        # Check if share symbol is valid
         if actual_share is None:
             return apology("Share symbol is incorrect, please text a valid symbol")
 
         rows = db.execute("SELECT no_share FROM resume WHERE user_id = ? AND share = ?", session["user_id"], symbol)
 
-        #Check if you have enough shares for selling
+        # Check if you have enough shares for selling
         if rows[0]["no_share"] >= quantity_sell:
-            #Calculate total sell and update transactions table
+            # Calculate total sell and update transactions table
             shares_updated = rows[0]["no_share"] - quantity_sell
             total_sell = quantity_sell * actual_share["price"]
             quantity_sell = quantity_sell * -1
-            db.execute("INSERT INTO transactions (user_id, action, date, share, no_shares, value) VALUES (?, ?, ?, ?, ?, ?)", session["user_id"], "Sell", actual_date, symbol, quantity_sell, total_sell)
+            db.execute("INSERT INTO transactions (user_id, action, date, share, no_shares, value) VALUES (?, ?, ?, ?, ?, ?)",
+                       session["user_id"], "Sell", actual_date, symbol, quantity_sell, total_sell)
 
-            #Request the actual cash for actual user
+            # Request the actual cash for actual user
             actual_cash = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
             cash_updated = actual_cash[0]["cash"] + total_sell
             db.execute("UPDATE users SET cash = ? WHERE id = ?", cash_updated, session["user_id"])
 
-            #Update resume table
+            # Update resume table
             db.execute("UPDATE resume SET no_share = ? WHERE user_id = ? AND share = ?", shares_updated, session["user_id"], symbol)
             return redirect("/")
 
         else:
             return apology("You don't have enough shares for selling, sorry")
 
+
 @app.route("/configuration", methods=["GET", "POST"])
 @login_required
 def configuration():
     """Configuration options"""
     if request.method == "GET":
-        return render_template ("configuration.html")
+        return render_template("configuration.html")
     else:
         password = request.form.get("password")
         new_password = request.form.get("new_password")
@@ -331,6 +340,7 @@ def configuration():
         db.execute("UPDATE users SET hash = ?", generate_password_hash(request.form.get("new_password")))
 
     return redirect("/")
+
 
 def errorhandler(e):
     """Handle error"""
